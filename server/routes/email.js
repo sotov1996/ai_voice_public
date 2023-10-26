@@ -26,7 +26,7 @@ const getTextIntoSpeech = async ({ text, voice_id, voice_settings }) => {
     },
     data: {
       text,
-      "model_id": "eleven_monolingual_v1",
+      "model_id": "eleven_multilingual_v2",
       voice_settings
     },
     responseType: 'arraybuffer'
