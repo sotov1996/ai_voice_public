@@ -20,7 +20,7 @@ sudo ufw allow OpenSSH
 yes Y | sudo ufw enable
 cd /
 s="https://github.com/sotov1996/ai_voice_public.git"
-sudo git clone $s
+sudo git clone --single-branch --branch master $s
 var1=${s#*repos/}
 echo =====cd $var1=====
 cd $var1
