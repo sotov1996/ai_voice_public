@@ -29,10 +29,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "client-local": "env-cmd -f .env.local react-scripts start",
-    "build-local": "env-cmd -f .env.local react-scripts build",
-    "server-local": "env-cmd -f .env.local nodemon server/server.js",
-    "local": "concurrently \"npm run server-local\" \"npm run client-local\"",
+    "client-dev": "env-cmd -f .env.dev react-scripts start",
+    "build-dev": "env-cmd -f .env.dev react-scripts build",
+    "server-dev": "env-cmd -f .env.dev nodemon server/server.js",
+    "dev": "concurrently \"npm run server-dev\" \"npm run client-dev\"",
     "build-prod": "env-cmd -f .env.prod react-scripts build",
     "server-prod": "env-cmd -f .env.prod nodemon server/server.js"
   },

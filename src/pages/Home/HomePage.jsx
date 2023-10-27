@@ -6,9 +6,9 @@ import { getVoices } from "../../services/elevenLabs"
 
 import "./homePage.css"
 
-export const HomePage = ({ setLoading }) => {
-
+export const HomePage = ({ setLoading, setAlert }) => {
     const [voices, setVoisec] = useState([])
+
     useEffect(() => {
         getVoicesEleveLabs()
         handlerStripeUrl()
@@ -23,10 +23,14 @@ export const HomePage = ({ setLoading }) => {
             if (body?.session_id === sessionId) {
                 setLoading(true)
                 const data = await sendEmail(body);
-                if (data.success) {
-                    localStorage.removeItem('text-to-speech')
-                }
                 setLoading(false)
+                if (!data.success) {
+                    setAlert({ status: "error", message: data.message })
+                    return setTimeout(() => setAlert(""), 3000);
+                }
+                setAlert({ status: "success", message: "The payment was successful." })
+                setTimeout(() => setAlert(""), 3000);
+                localStorage.removeItem('text-to-speech')
             }
             // window.location.replace("/")
         } else if (query.get('canceled')) {
@@ -36,9 +40,11 @@ export const HomePage = ({ setLoading }) => {
 
     const getVoicesEleveLabs = async () => {
         const data = await getVoices()
-        if (data.success) {
-            setVoisec(data.voices)
+        if (!data.success) {
+            setAlert({ status: "error", message: data.message })
+            return setTimeout(() => setAlert(""), 3000);
         }
+        setVoisec(data.voices)
     }
 
     const handler = async (values) => {

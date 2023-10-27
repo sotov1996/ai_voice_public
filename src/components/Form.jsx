@@ -92,7 +92,10 @@ export const FormInput = ({ handler, voices }) => {
 								<Select {...field} placeholder="Select Voices">
 									{voices.map((voice) => (
 										<option key={voice.voice_id} value={voice.voice_id}>
-											{voice.name}
+											{voice.name} -
+											{voice.labels.accent && ` ${voice.labels.accent}`}
+											{voice.labels.description && `, ${voice.labels.description}`}
+											{voice.labels["use case" || "use_case"] && `, ${voice.labels["use case" || "use_case"]}`}
 										</option>
 									))}
 								</Select>
