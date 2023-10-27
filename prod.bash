@@ -35,3 +35,21 @@ sudo sed -i 's/default_server//g' /etc/nginx/sites-available/default
 sudo nginx -t
 sudo systemctl restart nginx
 echo "--END--"
+
+
+echo =====cd /ai_voice_public=====
+cd /ai_voice_public
+echo =====sudo git pull=====
+sudo git pull origin
+echo ====sudo pm2 stop====
+sudo pm2 delete 0
+echo ====killall node=====
+sudo killall node
+echo =====sudo npm i=====
+sudo npm i
+echo =====sudo npm run build-prod=====
+sudo npm run build-prod
+echo =====sudo pm2 delete=====
+sudo pm2 delete "production"
+echo =====sudo pm2 production=====
+sudo pm2 start npm --name "production" -- run server-prod
