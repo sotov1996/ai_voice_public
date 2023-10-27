@@ -8,9 +8,12 @@ import {
 	Select,
 	Textarea,
 	Text,
-	Stack
+	Stack,
+	InputRightElement,
+	InputGroup
 } from "@chakra-ui/react"
 import { Field, Form, Formik } from "formik"
+import { EmailIcon } from "../components"
 import "./form.css"
   
 export const FormInput = ({ handler, voices }) => {
@@ -77,23 +80,30 @@ export const FormInput = ({ handler, voices }) => {
 						{({ field, form }) => (
 							<FormControl isInvalid={form.errors.email && form.touched.email} mt={4}>
 								<FormLabel className="form-label">Your email</FormLabel>
-								<Input
-									{...field}
-									placeholder="ex. johndoe@gmail.com"
-									p={"12px"}
-									className="form-input"
-									bg={"rgba(255, 255, 255, 1)"}
-									border={"1px solid rgba(171, 168, 164, 1)"}
-									focusBorderColor='rgba(171, 168, 164, 1)'
-									errorBorderColor="rgba(208, 58, 103, 1)"
-									fontSize={"16px"}
-									_focusVisible={{
-										outline: "none",
-								   }}
-									_placeholder={{
-										color: "rgba(105, 101, 89, 0.6)"
-									}}
-								/>
+								<InputGroup>
+									<Input
+										{...field}
+										placeholder="ex. johndoe@gmail.com"
+										p={"12px"}
+										h={"48px"}
+										className="form-input"
+										bg={"rgba(255, 255, 255, 1)"}
+										borderWidth={"1px"}
+										borderColor={"rgba(171, 168, 164, 1)"}
+										focusBorderColor='rgba(171, 168, 164, 1)'
+										errorBorderColor="rgba(208, 58, 103, 1)"
+										fontSize={"16px"}
+										_focusVisible={{
+											outline: "none"
+										}}
+										_placeholder={{
+											color: "rgba(105, 101, 89, 0.6)"
+										}}
+									/>
+									<InputRightElement h={"100%"}>
+										<EmailIcon />
+									</InputRightElement>
+								</InputGroup>
 								<FormErrorMessage className="form-error" color={"rgba(208, 58, 103, 1)"}>{form.errors.email}</FormErrorMessage>
 							</FormControl>
 						)}
@@ -107,6 +117,9 @@ export const FormInput = ({ handler, voices }) => {
 								<FormLabel className="form-label">Voice</FormLabel>
 								<Select
 									{...field}
+									fontSize={"16px"}
+									h={"48px"}
+									fontFamily={"Poppins"}
 									placeholder="Select voice..."
 									bg={"rgba(255, 255, 255, 1)"}
 									border={"1px solid rgba(171, 168, 164, 1)"}
@@ -147,6 +160,8 @@ export const FormInput = ({ handler, voices }) => {
 								<Textarea
 									{...field}
 									className="textarea"
+									fontSize={"16px"}
+									fontFamily={"Poppins"}
 									minH={"180px"}
 									p={"12px"}
 									placeholder="Type your text to generate an affirmation..."
@@ -200,7 +215,7 @@ export const FormInput = ({ handler, voices }) => {
 							isLoading={props.isSubmitting}
 							type="submit"
 						>
-							Create Affirmation - $39
+							Order - $39
 						</Button>
 					</Stack>
 				</Form>

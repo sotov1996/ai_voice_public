@@ -1,8 +1,9 @@
 import "./App.css"
 import React, { useState } from "react"
-import { ChakraProvider, Center  } from "@chakra-ui/react"
+import { ChakraProvider  } from "@chakra-ui/react"
 import { HomePage } from "./pages/Home"
 import { CustomSpnner, CustomAlert } from "./components"
+
 
 export const App = () => {
 	const [loading, setLoading] = useState(false)
@@ -12,9 +13,7 @@ export const App = () => {
 		<ChakraProvider>
 			{loading && <CustomSpnner />}
 			{alert && <CustomAlert status={alert.status} message={alert.message} />}
-			<Center className="main">
-				<HomePage setLoading={setLoading} setAlert={setAlert} />
-			</Center >
+			<HomePage setLoading={setLoading} setAlert={setAlert} />
 		</ChakraProvider>
 	)
 }

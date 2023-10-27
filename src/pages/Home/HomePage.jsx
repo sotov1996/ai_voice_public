@@ -3,7 +3,7 @@ import { FormInput } from "../../components";
 import { createCheckoutSession } from "../../services/stripe"
 import { sendEmail } from "../../services/email"
 import { getVoices } from "../../services/elevenLabs"
-import { Box } from "@chakra-ui/react"
+import { Flex, Stack, Heading } from "@chakra-ui/react"
 
 import "./homePage.css"
 
@@ -55,10 +55,49 @@ export const HomePage = ({ setLoading, setAlert }) => {
             return window.location.replace(data.session_url);
         }
     }
-    return (
+    /*return (
         <Box bg='#F6F5F2' w='644px' minH='687px' p={"32px 64px"} className="main-box">
             <h1 className="main-title">Affirmation <span>Synthesis</span></h1>
             <FormInput handler={handler} voices={voices} />
         </Box>
-    )
+    )*/
+    return (
+        <Flex
+          minH={'100vh'}
+          align={'center'}
+          justify={'center'}
+          className="wrapper"
+          >
+          <Stack
+            spacing={4}
+            borderRadius={"16px"}
+            w={'full'}
+            maxW={'644px'}
+            bg={'rgba(246, 245, 242, 1)'}
+            boxShadow={'0px 16px 24px 0px rgba(64, 52, 16, 0.08)'}
+            p={"32px 64px 32px 64px"}>
+            <Heading
+                fontFamily={"Playfair Display"}
+                fontSize={"32px"}
+                fontWeight={500}
+                lineHeight={"38px"}
+                color={"rgba(52, 123, 98, 1)"}
+                textAlign={"center"}
+                fontStyle={"italic"}
+            >
+                Affirmation
+                {" "}
+                <span
+                    style={{
+                        color: "rgba(35, 35, 35, 1)",
+                        fontWeight: 400,
+                        fontStyle: "normal"
+                    }}
+                >Synthesis</span>
+            </Heading>
+            <FormInput handler={handler} voices={voices} />
+          </Stack>
+        </Flex>
+      )
+
 }
