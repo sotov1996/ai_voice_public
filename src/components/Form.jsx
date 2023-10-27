@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import {
 	FormControl,
 	FormLabel,
@@ -6,14 +6,16 @@ import {
 	Input,
 	Button,
 	Select,
-	Textarea
+	Textarea,
+	Text,
+	Stack
 } from "@chakra-ui/react"
 import { Field, Form, Formik } from "formik"
-import { SliderThumbWithTooltip } from "./"
-
+import "./form.css"
+  
 export const FormInput = ({ handler, voices }) => {
-  const [stabilityValue, setStabilityValue] = useState(50)
-  const [similarityBoostValue, setSimilarityBoostValue] = useState(50)
+  // const [stabilityValue, setStabilityValue] = useState(50)
+  // const [similarityBoostValue, setSimilarityBoostValue] = useState(50)
 
 	  const validateEmail = (email) => {
 		const errors = {}
@@ -46,8 +48,8 @@ export const FormInput = ({ handler, voices }) => {
     const body = {
       ...values,
       voice_settings: {
-        stability: stabilityValue/100,
-        similarity_boost: similarityBoostValue/100
+        stability: 0.5,
+        similarity_boost: 0.5
       }
     }
 		await handler(body)
@@ -70,15 +72,29 @@ export const FormInput = ({ handler, voices }) => {
 			onSubmit={onSubmit}
 		>
 			{(props) => (
-				<Form
-					style={{ maxWidth: "600px", margin: "auto", minHeight: "calc(100vh - 168px)" }}
-				>
+				<Form>
 					<Field name="email">
 						{({ field, form }) => (
 							<FormControl isInvalid={form.errors.email && form.touched.email} mt={4}>
-								<FormLabel>Email</FormLabel>
-								<Input {...field} placeholder="Email" />
-								<FormErrorMessage>{form.errors.email}</FormErrorMessage>
+								<FormLabel className="form-label">Your email</FormLabel>
+								<Input
+									{...field}
+									placeholder="ex. johndoe@gmail.com"
+									p={"12px"}
+									className="form-input"
+									bg={"rgba(255, 255, 255, 1)"}
+									border={"1px solid rgba(171, 168, 164, 1)"}
+									focusBorderColor='rgba(171, 168, 164, 1)'
+									errorBorderColor="rgba(208, 58, 103, 1)"
+									fontSize={"16px"}
+									_focusVisible={{
+										outline: "none",
+								   }}
+									_placeholder={{
+										color: "rgba(105, 101, 89, 0.6)"
+									}}
+								/>
+								<FormErrorMessage className="form-error" color={"rgba(208, 58, 103, 1)"}>{form.errors.email}</FormErrorMessage>
 							</FormControl>
 						)}
 					</Field>
@@ -88,8 +104,21 @@ export const FormInput = ({ handler, voices }) => {
 								isInvalid={form.errors.voice_id && form.touched.voice_id}
 								mt={4}
 							>
-								<FormLabel>Voices</FormLabel>
-								<Select {...field} placeholder="Select Voices">
+								<FormLabel className="form-label">Voice</FormLabel>
+								<Select
+									{...field}
+									placeholder="Select voice..."
+									bg={"rgba(255, 255, 255, 1)"}
+									border={"1px solid rgba(171, 168, 164, 1)"}
+									focusBorderColor='rgba(171, 168, 164, 1)'
+									errorBorderColor="rgba(208, 58, 103, 1)"
+									_focusVisible={{
+										outline: "none",
+								   }}
+									_placeholder={{
+										color: "rgba(105, 101, 89, 0.6)"
+									}}
+								>
 									{voices.map((voice) => (
 										<option key={voice.voice_id} value={voice.voice_id}>
 											{voice.name} -
@@ -99,38 +128,81 @@ export const FormInput = ({ handler, voices }) => {
 										</option>
 									))}
 								</Select>
-								<FormErrorMessage>{form.errors.voice_id}</FormErrorMessage>
+								<FormErrorMessage className="form-error" color={"rgba(208, 58, 103, 1)"}>{form.errors.voice_id}</FormErrorMessage>
 							</FormControl>
 						)}
 					</Field>
-          <FormControl mt={4}>
-            <FormLabel >Stability</FormLabel>
+					{/*<FormControl mt={4}>
+						<FormLabel >Stability</FormLabel>
 						<SliderThumbWithTooltip setSettingValue={setStabilityValue} settingValue={stabilityValue} />
 					</FormControl>
-          <FormControl mt={4}>
-            <FormLabel>Similarity Boost</FormLabel>
+					<FormControl mt={4}>
+						<FormLabel>Similarity Boost</FormLabel>
 						<SliderThumbWithTooltip setSettingValue={setSimilarityBoostValue} settingValue={similarityBoostValue} />
-					</FormControl>
+					</FormControl>*/}
 					<Field name="text">
 						{({ field, form }) => (
 							<FormControl isInvalid={form.errors.text && form.touched.text} mt={4}>
-								<FormLabel>Text to Speech</FormLabel>
-								<Textarea {...field} size={"lg"} placeholder="Text" />
-								<FormErrorMessage>{form.errors.text}</FormErrorMessage>
+								<FormLabel className="form-label">Text to Speech</FormLabel>
+								<Textarea
+									{...field}
+									className="textarea"
+									minH={"180px"}
+									p={"12px"}
+									placeholder="Type your text to generate an affirmation..."
+									bg={"rgba(255, 255, 255, 1)"}
+									border={"1px solid rgba(171, 168, 164, 1)"}
+									focusBorderColor='rgba(171, 168, 164, 1)'
+									errorBorderColor="rgba(208, 58, 103, 1)"
+									_focusVisible={{
+										outline: "none",
+								   }}
+									_placeholder={{
+										color: "rgba(105, 101, 89, 0.6)"
+									}}
+								/>
+								{!form.errors.text && <Text className="textarea-limit">2500 characters left</Text>}
+								<FormErrorMessage className="form-error" color={"rgba(208, 58, 103, 1)"}>{form.errors.text}</FormErrorMessage>
 							</FormControl>
 						)}
 					</Field>
-					<Button
-						mt={4}
-						mb={4}
-						bg="rgba(49, 43, 65, 0.5)"
-						color="white"
-						isLoading={props.isSubmitting}
-						w="100%"
-						type="submit"
-					>
-						Generate
-					</Button>
+					<Stack direction='row' justifyContent={"space-between"} pt={"55px"}>
+						<Button
+							variant='solid'
+							fontWeight={400}
+							fontFamily={"Poppins"}
+							fontSize={"16px"}
+							lineHeight={"24px"}
+							borderRadius={"8px"}
+							h={"48px"}
+							border={"1px solid rgba(0, 0, 0, 0.15)"}
+							color={"rgba(105, 101, 89, 1)"}
+							bg={"none"}
+							p={"12px 24px 12px 24px"}
+						>
+							Back to Home
+						</Button>
+						<Button
+							variant={"solid"}
+							fontWeight={400}
+							fontFamily={"Poppins"}
+							fontSize={"16px"}
+							lineHeight={"24px"}
+							borderRadius={"8px"}
+							color={"rgba(255, 255, 255, 1)"}
+							h={"48px"}
+							bg={"rgba(87, 152, 129, 1)"}
+							p={"12px 24px 12px 24px"}
+							_hover={{
+								backgroundColor: "rgba(87, 152, 129, 1)",
+								opacity: "0.5"
+							}}
+							isLoading={props.isSubmitting}
+							type="submit"
+						>
+							Create Affirmation - $39
+						</Button>
+					</Stack>
 				</Form>
 			)}
 		</Formik>

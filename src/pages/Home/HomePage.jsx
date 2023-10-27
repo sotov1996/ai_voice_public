@@ -3,6 +3,7 @@ import { FormInput } from "../../components";
 import { createCheckoutSession } from "../../services/stripe"
 import { sendEmail } from "../../services/email"
 import { getVoices } from "../../services/elevenLabs"
+import { Box } from "@chakra-ui/react"
 
 import "./homePage.css"
 
@@ -54,5 +55,10 @@ export const HomePage = ({ setLoading, setAlert }) => {
             return window.location.replace(data.session_url);
         }
     }
-    return ( <FormInput handler={handler} voices={voices} /> )
+    return (
+        <Box bg='#F6F5F2' w='644px' minH='687px' p={"32px 64px"} className="main-box">
+            <h1 className="main-title">Affirmation <span>Synthesis</span></h1>
+            <FormInput handler={handler} voices={voices} />
+        </Box>
+    )
 }
