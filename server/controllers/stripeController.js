@@ -8,7 +8,7 @@ const createCheckoutSession = async (_, res) => {
 			session_id: session.id,
 		})
 	} catch (e) {
-		return res.send(500)
+		return res.status(500).send(e)
 	}
 }
 

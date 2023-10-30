@@ -26,5 +26,6 @@
 
 
 .wrapper {
-    background-image: url("../../assets/bg-pattern-symbol.svg")
+    background-image: url("../../assets/bg-pattern-symbol.svg");
+    background-color: rgba(246, 245, 242, 1);
 }

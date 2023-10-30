@@ -30,7 +30,7 @@ export const HomePage = ({ setLoading, setAlert }) => {
                     return setTimeout(() => setAlert(""), 3000);
                 }
                 setAlert({ status: "success", message: "The payment was successful." })
-                setTimeout(() => setAlert(""), 3000);
+                setTimeout(() => setAlert(""), 5000);
                 localStorage.removeItem('text-to-speech')
             }
             // window.location.replace("/")
