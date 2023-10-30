@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useRef } from "react"
 import {
 	FormControl,
 	FormLabel,
@@ -20,11 +20,12 @@ import "./form.css"
 const linkVoiceOverArtistsMyAffirmation = "https://lemondigital.notion.site/Voice-Over-Artists-MyAffirmation-ai-acb83e4627cf48749a2ceb9ad72af02c?pvs=4"
 const linkAffirmationTemplates = "https://lemondigital.notion.site/Affirmation-text-Templates-0a2edbbb9f9d480b881d6923dee4f42f?pvs=4"
   
-export const FormInput = ({ handler, voices }) => {
+export const FormInput = ({ payment, generateAudio, voices, audioUrl }) => {
   // const [stabilityValue, setStabilityValue] = useState(50)
   // const [similarityBoostValue, setSimilarityBoostValue] = useState(50)
+  	const audioref = useRef()
 
-	  const validateEmail = (email) => {
+	const validateEmail = (email) => {
 		const errors = {}
 		if (!email) {
 			errors.email = "Required"
@@ -51,15 +52,19 @@ export const FormInput = ({ handler, voices }) => {
 	}
 
 	const onSubmit = async (values, actions) => {
-		console.log(values)
-    const body = {
-      ...values,
-      voice_settings: {
-        stability: 0.5,
-        similarity_boost: 0.5
-      }
-    }
-		await handler(body)
+		const body = {
+			...values,
+			voice_settings: {
+				stability: 0.5,
+				similarity_boost: 0.5
+			}
+		}
+
+		if (audioUrl) {
+			await payment(body)
+		} else {
+			await generateAudio(body, audioref)
+		}
 		actions.setSubmitting(false)
 	}
 
@@ -119,12 +124,12 @@ export const FormInput = ({ handler, voices }) => {
 								mt={4}
 							>
 								<Stack
-									direction={{ base: 'column', sm: 'row' }}
+									direction={{ base: 'row', sm: 'row' }}
 									align={'start'}
 									justify={'space-between'}>
 									<FormLabel className="form-label">Voice</FormLabel>
 									<Stack
-										direction={{ base: 'column', sm: 'row' }}
+										direction={{ base: "row", sm: 'row' }}
 										align={'center'}
 									>
 										<Link
@@ -180,12 +185,12 @@ export const FormInput = ({ handler, voices }) => {
 						{({ field, form }) => (
 							<FormControl isInvalid={form.errors.text && form.touched.text} mt={4}>
 								<Stack
-									direction={{ base: 'column', sm: 'row' }}
+									direction={{ base: 'row', sm: 'row' }}
 									align={'start'}
 									justify={'space-between'}>
 									<FormLabel className="form-label">Text to Speech</FormLabel>
 									<Stack
-										direction={{ base: 'column', sm: 'row' }}
+										direction={{ base: 'row', sm: 'row' }}
 										align={'center'}
 									>
 										<Link
@@ -224,6 +229,22 @@ export const FormInput = ({ handler, voices }) => {
 							</FormControl>
 						)}
 					</Field>
+					{audioUrl && (
+						<Stack>
+							<Text
+								className="form-label"
+								pt={"20px"}
+							>
+								Listen to a 5 second recording. The rest is available by mail after payment for the order.
+							</Text>
+							<audio
+								ref={audioref}
+								controls
+							>
+								<source src={audioUrl} type="audio/mpeg" />
+							</audio>
+						</Stack>
+					)}
 					<Stack direction='row' justifyContent={"space-between"} pt={"55px"}>
 						<Button
 							variant='solid'
@@ -258,7 +279,7 @@ export const FormInput = ({ handler, voices }) => {
 							isLoading={props.isSubmitting}
 							type="submit"
 						>
-							Order - $39
+							{ audioUrl ? "Order - $39" : "Generate" }
 						</Button>
 					</Stack>
 				</Form>

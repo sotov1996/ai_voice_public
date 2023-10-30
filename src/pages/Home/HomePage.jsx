@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { FormInput } from "../../components";
 import { createCheckoutSession } from "../../services/stripe"
 import { sendEmail } from "../../services/email"
-import { getVoices } from "../../services/elevenLabs"
+import { getVoices, getTextIntoSpeech } from "../../services/elevenLabs"
 import { Flex, Stack, Heading } from "@chakra-ui/react"
 
 import "./homePage.css"
 
 export const HomePage = ({ setLoading, setAlert, plausible }) => {
     const [voices, setVoisec] = useState([])
+    const [audioUrl, setAudioUrl] = useState(null)
 
     useEffect(() => {
         getVoicesEleveLabs()
@@ -49,7 +50,7 @@ export const HomePage = ({ setLoading, setAlert, plausible }) => {
         setVoisec(data.voices)
     }
 
-    const handler = async (values) => {
+    const payment = async (values) => {
         const data = await createCheckoutSession(values)
         plausible.trackEvent('Create Order')
         if (data.success) {
@@ -57,12 +58,22 @@ export const HomePage = ({ setLoading, setAlert, plausible }) => {
             return window.location.replace(data.session_url);
         }
     }
-    /*return (
-        <Box bg='#F6F5F2' w='644px' minH='687px' p={"32px 64px"} className="main-box">
-            <h1 className="main-title">Affirmation <span>Synthesis</span></h1>
-            <FormInput handler={handler} voices={voices} />
-        </Box>
-    )*/
+    const generateAudio = async (values, audioref) => {
+        const data = await getTextIntoSpeech(values)
+        if (!data.success) {
+            setAlert({ status: "error", message: data.message })
+            return setTimeout(() => setAlert(""), 3000);
+        }
+        const blob = new Blob([data.content], { type: 'audio/mpeg' });
+        const urlAudioBlob = URL.createObjectURL(blob);
+        setAudioUrl(urlAudioBlob)
+        if(audioref.current){
+            audioref.current.pause();
+            audioref.current.load();
+            audioref.current.play();
+        }
+    }
+
     return (
         <Flex
           minH={'100vh'}
@@ -97,7 +108,12 @@ export const HomePage = ({ setLoading, setAlert, plausible }) => {
                     }}
                 >Synthesis</span>
             </Heading>
-            <FormInput handler={handler} voices={voices} />
+            <FormInput
+                generateAudio={generateAudio}
+                voices={voices}
+                audioUrl={audioUrl}
+                payment={payment}
+            />
           </Stack>
         </Flex>
       )
