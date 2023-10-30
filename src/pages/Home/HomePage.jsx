@@ -7,7 +7,7 @@ import { Flex, Stack, Heading } from "@chakra-ui/react"
 
 import "./homePage.css"
 
-export const HomePage = ({ setLoading, setAlert }) => {
+export const HomePage = ({ setLoading, setAlert, plausible }) => {
     const [voices, setVoisec] = useState([])
 
     useEffect(() => {
@@ -50,6 +50,7 @@ export const HomePage = ({ setLoading, setAlert }) => {
 
     const handler = async (values) => {
         const data = await createCheckoutSession(values)
+        plausible.trackEvent('Order')
         if (data.success) {
             localStorage.setItem('text-to-speech', JSON.stringify({ ...values, session_id: data.session_id }));
             return window.location.replace(data.session_url);

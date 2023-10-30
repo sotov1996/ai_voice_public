@@ -10,11 +10,15 @@ import {
 	Text,
 	Stack,
 	InputRightElement,
-	InputGroup
+	InputGroup,
+	Link
 } from "@chakra-ui/react"
 import { Field, Form, Formik } from "formik"
 import { EmailIcon, LinkIcon } from "../components"
 import "./form.css"
+
+const linkVoiceOverArtistsMyAffirmation = "https://lemondigital.notion.site/Voice-Over-Artists-MyAffirmation-ai-acb83e4627cf48749a2ceb9ad72af02c?pvs=4"
+const linkAffirmationTemplates = "https://lemondigital.notion.site/Affirmation-text-Templates-0a2edbbb9f9d480b881d6923dee4f42f?pvs=4"
   
 export const FormInput = ({ handler, voices }) => {
   // const [stabilityValue, setStabilityValue] = useState(50)
@@ -123,13 +127,15 @@ export const FormInput = ({ handler, voices }) => {
 										direction={{ base: 'column', sm: 'row' }}
 										align={'center'}
 									>
-										<Text
+										<Link
 											color={'rgba(52, 123, 97, 1)'}
 											fontSize={"16px"}
 											fontFamily={"Poppins"}
 											lineHeight={"24px"}
 											fontWeight={400}
-										>Voice Over Examples</Text>
+											href={linkVoiceOverArtistsMyAffirmation}
+											isExternal
+										>Voice Over Examples</Link>
 										<LinkIcon />
 									</Stack>
 								</Stack>
@@ -182,13 +188,15 @@ export const FormInput = ({ handler, voices }) => {
 										direction={{ base: 'column', sm: 'row' }}
 										align={'center'}
 									>
-										<Text
+										<Link
 											color={'rgba(52, 123, 97, 1)'}
 											fontSize={"16px"}
 											fontFamily={"Poppins"}
 											lineHeight={"24px"}
 											fontWeight={400}
-										>Affirmation Text Templates</Text>
+											href={linkAffirmationTemplates}
+											isExternal
+										>Affirmation Text Templates</Link>
 										<LinkIcon />
 									</Stack>
 								</Stack>
