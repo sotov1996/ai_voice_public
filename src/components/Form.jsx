@@ -13,7 +13,7 @@ import {
 	InputGroup
 } from "@chakra-ui/react"
 import { Field, Form, Formik } from "formik"
-import { EmailIcon } from "../components"
+import { EmailIcon, LinkIcon } from "../components"
 import "./form.css"
   
 export const FormInput = ({ handler, voices }) => {
@@ -114,7 +114,25 @@ export const FormInput = ({ handler, voices }) => {
 								isInvalid={form.errors.voice_id && form.touched.voice_id}
 								mt={4}
 							>
-								<FormLabel className="form-label">Voice</FormLabel>
+								<Stack
+									direction={{ base: 'column', sm: 'row' }}
+									align={'start'}
+									justify={'space-between'}>
+									<FormLabel className="form-label">Voice</FormLabel>
+									<Stack
+										direction={{ base: 'column', sm: 'row' }}
+										align={'center'}
+									>
+										<Text
+											color={'rgba(52, 123, 97, 1)'}
+											fontSize={"16px"}
+											fontFamily={"Poppins"}
+											lineHeight={"24px"}
+											fontWeight={400}
+										>Voice Over Examples</Text>
+										<LinkIcon />
+									</Stack>
+								</Stack>
 								<Select
 									{...field}
 									fontSize={"16px"}
@@ -156,7 +174,25 @@ export const FormInput = ({ handler, voices }) => {
 					<Field name="text">
 						{({ field, form }) => (
 							<FormControl isInvalid={form.errors.text && form.touched.text} mt={4}>
-								<FormLabel className="form-label">Text to Speech</FormLabel>
+								<Stack
+									direction={{ base: 'column', sm: 'row' }}
+									align={'start'}
+									justify={'space-between'}>
+									<FormLabel className="form-label">Text to Speech</FormLabel>
+									<Stack
+										direction={{ base: 'column', sm: 'row' }}
+										align={'center'}
+									>
+										<Text
+											color={'rgba(52, 123, 97, 1)'}
+											fontSize={"16px"}
+											fontFamily={"Poppins"}
+											lineHeight={"24px"}
+											fontWeight={400}
+										>Affirmation Text Templates</Text>
+										<LinkIcon />
+									</Stack>
+								</Stack>
 								<Textarea
 									{...field}
 									className="textarea"
