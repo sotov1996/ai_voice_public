@@ -212,7 +212,7 @@ export const FormInput = ({ handler, voices }) => {
 										color: "rgba(105, 101, 89, 0.6)"
 									}}
 								/>
-								{!form.errors.text && <Text className="textarea-limit">2500 characters left</Text>}
+								<Text className="textarea-limit">2500 characters left</Text>
 								<FormErrorMessage className="form-error" color={"rgba(208, 58, 103, 1)"}>{form.errors.text}</FormErrorMessage>
 							</FormControl>
 						)}
