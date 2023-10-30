@@ -29,6 +29,7 @@ export const HomePage = ({ setLoading, setAlert, plausible }) => {
                     setAlert({ status: "error", message: data.message })
                     return setTimeout(() => setAlert(""), 3000);
                 }
+                plausible.trackEvent('Successful Payment')
                 setAlert({ status: "success", message: "The payment was successful." })
                 setTimeout(() => setAlert(""), 5000);
                 localStorage.removeItem('text-to-speech')
@@ -50,7 +51,7 @@ export const HomePage = ({ setLoading, setAlert, plausible }) => {
 
     const handler = async (values) => {
         const data = await createCheckoutSession(values)
-        plausible.trackEvent('Order')
+        plausible.trackEvent('Create Order')
         if (data.success) {
             localStorage.setItem('text-to-speech', JSON.stringify({ ...values, session_id: data.session_id }));
             return window.location.replace(data.session_url);
