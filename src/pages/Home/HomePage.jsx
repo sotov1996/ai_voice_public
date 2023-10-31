@@ -68,6 +68,7 @@ export const HomePage = ({ setLoading, setAlert, plausible }) => {
             setAlert({ status: "error", message: data.message })
             return setTimeout(() => setAlert(""), 3000);
         }
+        plausible.trackEvent('Generate')
         const blob = new Blob([data.content], { type: 'audio/mpeg' });
         const urlAudioBlob = URL.createObjectURL(blob);
         setAudioUrl(urlAudioBlob)
