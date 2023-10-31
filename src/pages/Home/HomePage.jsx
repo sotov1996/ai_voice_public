@@ -35,7 +35,6 @@ export const HomePage = ({ setLoading, setAlert, plausible }) => {
                 plausible.trackEvent('Successful Payment')
                 localStorage.removeItem('text-to-speech')
             }
-            // window.location.replace("/")
         } else if (query.get('canceled')) {
             // window.location.replace("/")
         }
