@@ -2,7 +2,7 @@ import { fetchNode } from "../lib/fetch"
 import axios from "axios"
 
 const GET_VOICES = "https://api.elevenlabs.io/v1/voices"
-const TEXT_INTO_SPEECH= "/api/elevenlabs/text-into-speetch"
+const TEXT_INTO_SPEECH= "https://api.elevenlabs.io/v1/text-to-speech"
 
 const { REACT_APP_X_APY_KEY_ELEVENLABS } = process.env
 
@@ -53,7 +53,7 @@ export const getVoices = async (body) => {
 
 export const getTextIntoSpeech = async ({ text, voice_id, voice_settings }) => {
     try {
-        const url = `https://api.elevenlabs.io/v1/text-to-speech/${voice_id}`
+        const url = `${TEXT_INTO_SPEECH}/${voice_id}`
         const apiRequestOptions = {
         method: 'POST',
         url: url,

@@ -30,9 +30,9 @@ export const HomePage = ({ setLoading, setAlert, plausible }) => {
                     setAlert({ status: "error", message: data.message })
                     return setTimeout(() => setAlert(""), 3000);
                 }
-                plausible.trackEvent('Successful Payment')
                 setAlert({ status: "success", message: "The payment was successful." })
                 setTimeout(() => setAlert(""), 5000);
+                plausible.trackEvent('Successful Payment')
                 localStorage.removeItem('text-to-speech')
             }
             // window.location.replace("/")
@@ -42,7 +42,9 @@ export const HomePage = ({ setLoading, setAlert, plausible }) => {
     }
 
     const getVoicesEleveLabs = async () => {
+        setLoading(true)
         const data = await getVoices()
+        setLoading(false)
         if (!data.success) {
             setAlert({ status: "error", message: data.message })
             return setTimeout(() => setAlert(""), 3000);
@@ -59,7 +61,10 @@ export const HomePage = ({ setLoading, setAlert, plausible }) => {
         }
     }
     const generateAudio = async (values, audioref) => {
-        const data = await getTextIntoSpeech(values)
+        const data = await getTextIntoSpeech({
+            ...values,
+            text: values.text.split(" ").slice(0, 15).join(" ")
+        })
         if (!data.success) {
             setAlert({ status: "error", message: data.message })
             return setTimeout(() => setAlert(""), 3000);

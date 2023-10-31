@@ -16,7 +16,7 @@ const sendEmail = async (req, res) => {
         }
 
         await emailServices.sendEmail(data);
-        return res.status(200).send({})
+        return res.status(200).json({})
       } catch (e) {
         return res.status(500).send(e)
       }
