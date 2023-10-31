@@ -1,12 +1,12 @@
 import React from "react"
+import "./icon.css"
 
 export const LinkIcon = () => {
 	return (
 		<svg
-			width="13"
-			height="12"
-			viewBox="0 0 13 12"
 			fill="none"
+			viewBox="0 0 13 12"
+			class="chakra-icon css-onkibi"
 			xmlns="http://www.w3.org/2000/svg"
 		>
 			<path
