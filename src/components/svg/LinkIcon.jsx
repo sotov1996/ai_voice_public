@@ -6,7 +6,7 @@ export const LinkIcon = () => {
 		<svg
 			fill="none"
 			viewBox="0 0 13 12"
-			class="chakra-icon css-onkibi"
+			className="chakra-icon css-onkibi"
 			xmlns="http://www.w3.org/2000/svg"
 		>
 			<path

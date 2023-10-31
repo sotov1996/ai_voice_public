@@ -233,9 +233,16 @@ export const FormInput = ({ payment, generateAudio, voices, audioUrl }) => {
 						<Stack>
 							<Text
 								className="form-label"
-								pt={"20px"}
+								pt={"40px"}
 							>
-								Listen to a 5 second recording. The rest is available by mail after payment for the order.
+								Listen to a small video recording. Full voice over track is unlocked available just for $39 after the payment.
+							</Text>
+							<Text
+								className="form-label"
+								pt={"20px"}
+								fontWeight={"bold"}
+							>
+								Demo of the Voice Over :
 							</Text>
 							<audio
 								ref={audioref}
@@ -279,7 +286,7 @@ export const FormInput = ({ payment, generateAudio, voices, audioUrl }) => {
 							isLoading={props.isSubmitting}
 							type="submit"
 						>
-							{ audioUrl ? "Order - $39" : "Generate" }
+							{ audioUrl ? "Buy full track - $39" : "Generate" }
 						</Button>
 					</Stack>
 				</Form>
