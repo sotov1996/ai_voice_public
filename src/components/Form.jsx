@@ -14,6 +14,7 @@ import {
 	Link
 } from "@chakra-ui/react"
 import { Field, Form, Formik } from "formik"
+import { defaultTextToSpeetch } from "../data"
 import { EmailIcon, LinkIcon } from "../components"
 import "./form.css"
 
@@ -70,7 +71,7 @@ export const FormInput = ({ payment, generateAudio, voices, audioUrl }) => {
 
 	return (
 		<Formik
-			initialValues={{ email: "", text: "", voice_id: "" }}
+			initialValues={{ email: "", text: defaultTextToSpeetch, voice_id: "" }}
 			validate={(values) => {
 				const errorsValidateEmail = validateEmail(values.email)
 				const errorsValidateText = validateText(values.text)
@@ -127,7 +128,7 @@ export const FormInput = ({ payment, generateAudio, voices, audioUrl }) => {
 									direction={{ base: 'row', sm: 'row' }}
 									align={'start'}
 									justify={'space-between'}>
-									<FormLabel className="form-label">Voice</FormLabel>
+									<FormLabel className="form-label">Voice (30 languages)</FormLabel>
 									<Stack
 										direction={{ base: "row", sm: 'row' }}
 										align={'center'}
