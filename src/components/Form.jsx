@@ -16,12 +16,13 @@ import {
 import { Field, Form, Formik } from "formik"
 import { defaultTextToSpeetch } from "../data"
 import { EmailIcon, LinkIcon } from "../components"
+import { RepeatIcon } from '@chakra-ui/icons'
 import "./form.css"
 
 const linkVoiceOverArtistsMyAffirmation = "https://lemondigital.notion.site/Voice-Over-Artists-MyAffirmation-ai-acb83e4627cf48749a2ceb9ad72af02c?pvs=4"
 const linkAffirmationTemplates = "https://lemondigital.notion.site/Affirmation-text-Templates-0a2edbbb9f9d480b881d6923dee4f42f?pvs=4"
   
-export const FormInput = ({ payment, generateAudio, voices, audioUrl }) => {
+export const FormInput = ({ payment, generateAudio, voices, audioUrl, setAudioUrl }) => {
   // const [stabilityValue, setStabilityValue] = useState(50)
   // const [similarityBoostValue, setSimilarityBoostValue] = useState(50)
   	const audioref = useRef()
@@ -95,6 +96,7 @@ export const FormInput = ({ payment, generateAudio, voices, audioUrl }) => {
 										{...field}
 										placeholder="ex. johndoe@gmail.com"
 										p={"12px"}
+										pr={"40px"}
 										h={"48px"}
 										className="form-input"
 										bg={"rgba(255, 255, 255, 1)"}
@@ -211,7 +213,7 @@ export const FormInput = ({ payment, generateAudio, voices, audioUrl }) => {
 									className="textarea"
 									fontSize={"16px"}
 									fontFamily={"Poppins"}
-									minH={"180px"}
+									minH={"220px"}
 									p={"12px"}
 									placeholder="Type your text to generate an affirmation..."
 									bg={"rgba(255, 255, 255, 1)"}
@@ -251,9 +253,15 @@ export const FormInput = ({ payment, generateAudio, voices, audioUrl }) => {
 							>
 								<source src={audioUrl} type="audio/mpeg" />
 							</audio>
+							<Text
+								className="form-label"
+								pt={"20px"}
+							>
+								Get motivation, reach your goals by listening your affirmation daily
+							</Text>
 						</Stack>
 					)}
-					<Stack direction='row' justifyContent={"space-between"} pt={"55px"}>
+					<Stack direction='row' justifyContent={"space-between"} pt={"40px"}>
 						<Button
 							variant='solid'
 							fontWeight={400}
@@ -261,13 +269,38 @@ export const FormInput = ({ payment, generateAudio, voices, audioUrl }) => {
 							fontSize={"16px"}
 							lineHeight={"24px"}
 							borderRadius={"8px"}
-							h={"48px"}
+							h={"auto"}
+							whiteSpace={"normal"}
 							border={"1px solid rgba(0, 0, 0, 0.15)"}
 							color={"rgba(105, 101, 89, 1)"}
 							bg={"none"}
 							p={"12px 24px 12px 24px"}
 						>
 							Back to Home
+						</Button>
+						<Button
+							variant='solid'
+							fontWeight={400}
+							fontFamily={"Poppins"}
+							fontSize={"16px"}
+							lineHeight={"24px"}
+							borderRadius={"8px"}
+							h={"auto"}
+							whiteSpace={"normal"}
+							border={"1px solid rgba(0, 0, 0, 0.15)"}
+							color={"rgba(105, 101, 89, 1)"}
+							bg={"none"}
+							p={"12px 24px 12px 24px"}
+							onClick={() => {
+								props.resetForm()
+								setAudioUrl(null)
+								localStorage.clear()
+							}}
+						>
+							<RepeatIcon
+								boxSize={6}
+								color={"rgba(105, 101, 89, 1)"}
+							/>
 						</Button>
 						<Button
 							variant={"solid"}
@@ -277,7 +310,8 @@ export const FormInput = ({ payment, generateAudio, voices, audioUrl }) => {
 							lineHeight={"24px"}
 							borderRadius={"8px"}
 							color={"rgba(255, 255, 255, 1)"}
-							h={"48px"}
+							h={"auto"}
+							whiteSpace={"normal"}
 							bg={"rgba(87, 152, 129, 1)"}
 							p={"12px 24px 12px 24px"}
 							_hover={{
@@ -290,6 +324,17 @@ export const FormInput = ({ payment, generateAudio, voices, audioUrl }) => {
 							{ audioUrl ? "Buy full track - $39" : "Generate" }
 						</Button>
 					</Stack>
+					{audioUrl && (
+						<Stack>
+							<Text
+								className="form-label"
+								pt={"25px"}
+								align={"center"}
+							>
+								Upload affirmation to your phone and listen  
+							</Text>
+						</Stack>
+					)}
 				</Form>
 			)}
 		</Formik>

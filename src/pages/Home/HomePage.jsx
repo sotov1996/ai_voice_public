@@ -3,7 +3,8 @@ import { FormInput } from "../../components";
 import { createCheckoutSession } from "../../services/stripe"
 import { sendEmail } from "../../services/email"
 import { getVoices, getTextIntoSpeech } from "../../services/elevenLabs"
-import { Flex, Stack, Heading } from "@chakra-ui/react"
+import { FormFooter } from "./FormFooter"
+import { Stack, Heading } from "@chakra-ui/react"
 
 import "./homePage.css"
 
@@ -48,7 +49,7 @@ export const HomePage = ({ setLoading, setAlert, plausible }) => {
             setAlert({ status: "error", message: data.message })
             return setTimeout(() => setAlert(""), 3000);
         }
-        setVoisec(data.voices)
+        setVoisec(data.voices.filter( voice => voice.name !== "Domi"))
     }
 
     const payment = async (values) => {
@@ -62,7 +63,7 @@ export const HomePage = ({ setLoading, setAlert, plausible }) => {
     const generateAudio = async (values, audioref) => {
         const data = await getTextIntoSpeech({
             ...values,
-            text: values.text.split(" ").slice(0, 15).join(" ")
+            text: values.text.split(" ").slice(0, 30).join(" ")
         })
         if (!data.success) {
             setAlert({ status: "error", message: data.message })
@@ -80,13 +81,7 @@ export const HomePage = ({ setLoading, setAlert, plausible }) => {
     }
 
     return (
-        <Flex
-          minH={'100vh'}
-          align={'center'}
-          justify={'center'}
-          className="wrapper"
-          >
-          <Stack
+        <Stack
             spacing={4}
             borderRadius={"16px"}
             w={'full'}
@@ -118,9 +113,10 @@ export const HomePage = ({ setLoading, setAlert, plausible }) => {
                 voices={voices}
                 audioUrl={audioUrl}
                 payment={payment}
+                setAudioUrl={setAudioUrl}
             />
-          </Stack>
-        </Flex>
+            <FormFooter />
+        </Stack>
       )
 
 }

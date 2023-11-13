@@ -1,8 +1,8 @@
 import "./App.css"
 import React, { useState } from "react"
-import { ChakraProvider  } from "@chakra-ui/react"
+import { ChakraProvider, Flex  } from "@chakra-ui/react"
 import Plausible from "plausible-tracker"
-import { HomePage } from "./pages/Home"
+import { HomePage } from "./pages"
 import { CustomSpnner, CustomAlert } from "./components"
 
 const plausible = Plausible({
@@ -18,7 +18,15 @@ export const App = () => {
 		<ChakraProvider>
 			{loading && <CustomSpnner />}
 			{alert && <CustomAlert status={alert.status} message={alert.message} />}
-			<HomePage setLoading={setLoading} setAlert={setAlert} plausible={plausible} />
+			<Flex
+				minH={'100vh'}
+				align={'center'}
+				justify={'center'}
+				className="wrapper"
+				p={"20px"}
+			>
+				<HomePage setLoading={setLoading} setAlert={setAlert} plausible={plausible} />
+			</Flex>
 		</ChakraProvider>
 	)
 }
