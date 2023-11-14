@@ -4,7 +4,7 @@ import { createCheckoutSession } from "../../services/stripe"
 import { sendEmail } from "../../services/email"
 import { getVoices, getTextIntoSpeech } from "../../services/elevenLabs"
 import { FormFooter } from "./FormFooter"
-import { Stack, Heading, Text } from "@chakra-ui/react"
+import { Stack, Heading } from "@chakra-ui/react"
 
 import "./homePage.css"
 
