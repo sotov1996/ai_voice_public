@@ -324,18 +324,16 @@ export const FormInput = ({ payment, generateAudio, voices, audioUrl, setAudioUr
 							{ audioUrl ? "Buy full track - $39" : "Generate" }
 						</Button>
 					</Stack>
-					{audioUrl && (
-						<Stack>
-							<Text
-								className="form-label"
-								pt={"25px"}
-								align={"center"}
-                                fontSize={"15px"}
-							>
-								Upload affirmation to your phone and listen  
-							</Text>
-						</Stack>
-					)}
+					<Stack>
+						<Text
+							className="form-label"
+							pt={"25px"}
+							align={"center"}
+                            fontSize={"15px"}
+						>
+							Upload affirmation to your phone and listen  
+						</Text>
+					</Stack>
 				</Form>
 			)}
 		</Formik>
