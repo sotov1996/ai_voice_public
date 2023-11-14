@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { FormInput } from "../../components";
+import { FormInput } from "./Form";
 import { createCheckoutSession } from "../../services/stripe"
 import { sendEmail } from "../../services/email"
 import { getVoices, getTextIntoSpeech } from "../../services/elevenLabs"
 import { FormFooter } from "./FormFooter"
 import { Stack, Heading } from "@chakra-ui/react"
+// import { ModalOpenai } from "./Modal"
 
 import "./homePage.css"
 

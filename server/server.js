@@ -6,6 +6,7 @@ const path = require("path")
 const stripe = require("./routes/stripe")
 const email = require("./routes/email")
 const elevenlabs = require("./routes/elevenlabs")
+const openai = require("./routes/openai")
 
 const { NODE_PORT } = process.env
 
@@ -19,6 +20,7 @@ app.use(express.static(path.join(__dirname, "/../build")))
 app.use("/api/stripe", stripe)
 app.use("/api/email", email)
 app.use("/api/elevenlabs", elevenlabs)
+app.use("/api/openai", openai)
 
 app.get("*", (_, res) => {
 	res.sendFile(path.join(`${__dirname}/../build/index.html`))

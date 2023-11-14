@@ -1,0 +1,11 @@
+.textarea::-webkit-scrollbar {
+    display: none;
+}
+.textarea {
+    -ms-overflow-style: none;  /* IE и Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+audio {
+    width: 100%;
+}
