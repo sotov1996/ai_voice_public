@@ -4,7 +4,7 @@ import { createCheckoutSession } from "../../services/stripe"
 import { sendEmail } from "../../services/email"
 import { getVoices, getTextIntoSpeech } from "../../services/elevenLabs"
 import { FormFooter } from "./FormFooter"
-import { Stack, Heading } from "@chakra-ui/react"
+import { Stack, Heading, Text } from "@chakra-ui/react"
 
 import "./homePage.css"
 
@@ -116,6 +116,18 @@ export const HomePage = ({ setLoading, setAlert, plausible }) => {
                 setAudioUrl={setAudioUrl}
             />
             <FormFooter />
+            {audioUrl && (
+						<Stack>
+							<Text
+								className="form-label"
+								pt={"25px"}
+								align={"center"}
+                                fontSize={"15px"}
+							>
+								Upload affirmation to your phone and listen  
+							</Text>
+						</Stack>
+					)}
         </Stack>
       )
 
