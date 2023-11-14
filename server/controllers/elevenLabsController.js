@@ -8,12 +8,23 @@ const TextIntoSpeech = async (req, res) => {
 
         const content = await elevenLabsServices.getTextIntoSpeech(req.body)
 
-        return res.status(200).json({ content })
+        return res.status(200).send(content)
+      } catch (e) {
+        return res.status(500).send(e)
+      }
+}
+
+const getVoices = async (req, res) => {
+    try {
+        const content = await elevenLabsServices.getVoices()
+
+        return res.status(200).json(content)
       } catch (e) {
         return res.status(500).send(e)
       }
 }
 
 module.exports = {
-    TextIntoSpeech
+    TextIntoSpeech,
+    getVoices
 }

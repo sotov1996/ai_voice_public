@@ -1,20 +1,15 @@
 import { fetchNode } from "../lib/fetch"
-import axios from "axios"
 
-const GET_VOICES = "https://api.elevenlabs.io/v1/voices"
-const TEXT_INTO_SPEECH= "https://api.elevenlabs.io/v1/text-to-speech"
-
-const { REACT_APP_X_APY_KEY_ELEVENLABS } = process.env
+const GET_VOICES = "/api/elevenlabs/voices"
+const TEXT_INTO_SPEECH= `/api/elevenlabs/text-into-speetch`
 
 export const getVoices = async (body) => {
     try {
         const response = await fetchNode(GET_VOICES, {
             method: "GET",
             headers: {
-                "accept": "application/json",
-                "xi-api-key": REACT_APP_X_APY_KEY_ELEVENLABS
-            },
-            body: JSON.stringify(body)
+                "accept": "application/json"
+            }
         })
         const data = await response.json()
         return {
@@ -29,7 +24,7 @@ export const getVoices = async (body) => {
     }
 }
 
-/* export const getTextIntoSpeech = async (body) => {
+export const getTextIntoSpeech = async (body) => {
     try {
         const response = await fetchNode(TEXT_INTO_SPEECH, {
             method: "POST",
@@ -38,9 +33,9 @@ export const getVoices = async (body) => {
             },
             body: JSON.stringify(body)
         })
-        const data = await response.json()
+        const data = await response.arrayBuffer()
         return {
-            ...data,
+            content: data,
             success: true
         }
     } catch (error) {
@@ -49,18 +44,18 @@ export const getVoices = async (body) => {
             success: false
         }
     }
-} */
+}
 
-export const getTextIntoSpeech = async ({ text, voice_id, voice_settings }) => {
+/*export const getTextIntoSpeech = async ({ text, voice_id, voice_settings }) => {
     try {
-        const url = `${TEXT_INTO_SPEECH}/${voice_id}`
+        const url = `https://api.elevenlabs.io/v1/text-to-speech/${voice_id}`
         const apiRequestOptions = {
         method: 'POST',
         url: url,
         headers: {
             accept: 'audio/mpeg',
             'content-type': 'application/json',
-            'xi-api-key': process.env.REACT_APP_X_APY_KEY_ELEVENLABS,
+            'xi-api-key': process.env.X_APY_KEY_ELEVENLABS,
         },
         data: {
             text,
@@ -81,4 +76,4 @@ export const getTextIntoSpeech = async ({ text, voice_id, voice_settings }) => {
             success: false
         }
     }
-}
+}*/

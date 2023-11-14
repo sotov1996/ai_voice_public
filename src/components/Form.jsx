@@ -278,30 +278,32 @@ export const FormInput = ({ payment, generateAudio, voices, audioUrl, setAudioUr
 						>
 							Back to Home
 						</Button>
-						<Button
-							variant='solid'
-							fontWeight={400}
-							fontFamily={"Poppins"}
-							fontSize={"16px"}
-							lineHeight={"24px"}
-							borderRadius={"8px"}
-							h={"auto"}
-							whiteSpace={"normal"}
-							border={"1px solid rgba(0, 0, 0, 0.15)"}
-							color={"rgba(105, 101, 89, 1)"}
-							bg={"none"}
-							p={"12px 24px 12px 24px"}
-							onClick={() => {
-								props.resetForm()
-								setAudioUrl(null)
-								localStorage.clear()
-							}}
-						>
-							<RepeatIcon
-								boxSize={6}
+						{audioUrl && (
+							<Button
+								variant='solid'
+								fontWeight={400}
+								fontFamily={"Poppins"}
+								fontSize={"16px"}
+								lineHeight={"24px"}
+								borderRadius={"8px"}
+								h={"auto"}
+								whiteSpace={"normal"}
+								border={"1px solid rgba(0, 0, 0, 0.15)"}
 								color={"rgba(105, 101, 89, 1)"}
-							/>
-						</Button>
+								bg={"none"}
+								p={"12px 24px 12px 24px"}
+								onClick={() => {
+									props.resetForm()
+									setAudioUrl(null)
+									localStorage.clear()
+								}}
+							>
+								<RepeatIcon
+									boxSize={6}
+									color={"rgba(105, 101, 89, 1)"}
+								/>
+							</Button>
+						)}
 						<Button
 							variant={"solid"}
 							fontWeight={400}

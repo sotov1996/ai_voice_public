@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { TextIntoSpeech } =  require("../controllers/elevenLabsController")
+const { TextIntoSpeech, getVoices } =  require("../controllers/elevenLabsController")
 
 router.post("/text-into-speetch", TextIntoSpeech)
+router.get("/voices", getVoices)
 
 module.exports = router;
