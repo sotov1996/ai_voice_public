@@ -29,22 +29,21 @@ export const HomePage = ({ setLoading, setAlert, plausible }) => {
                 setLoading(false)
                 if (!data.success) {
                     setAlert({ status: "error", message: data.message })
+                    localStorage.removeItem('text-to-speech')
                     return setTimeout(() => setAlert(""), 3000);
                 }
                 setAlert({ status: "success", message: "The payment was successful." })
                 setTimeout(() => setAlert(""), 5000);
                 plausible.trackEvent('Successful Payment')
-                localStorage.removeItem('text-to-speech')
             }
         } else if (query.get('canceled')) {
+            localStorage.removeItem('text-to-speech')
             // window.location.replace("/")
         }
     }
 
     const getVoicesEleveLabs = async () => {
-        setLoading(true)
         const data = await getVoices()
-        setLoading(false)
         if (!data.success) {
             setAlert({ status: "error", message: data.message })
             return setTimeout(() => setAlert(""), 3000);
