@@ -116,18 +116,6 @@ export const HomePage = ({ setLoading, setAlert, plausible }) => {
                 setAudioUrl={setAudioUrl}
             />
             <FormFooter />
-            {audioUrl && (
-						<Stack>
-							<Text
-								className="form-label"
-								pt={"25px"}
-								align={"center"}
-                                fontSize={"15px"}
-							>
-								Upload affirmation to your phone and listen  
-							</Text>
-						</Stack>
-					)}
         </Stack>
       )
 
