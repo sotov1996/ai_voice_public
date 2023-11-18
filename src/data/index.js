@@ -21,3 +21,6 @@ export const defaultTextToSpeetch = `Input your text in that form, correct the t
 "Remember, Mia Rodriguez, it's not the mountain ahead that wears you out, but the pebble in your shoe. Stay focused, keep going, and you will triumph."
 
 With each affirmation, imagine the calm, assuring voice of a wise mentor guiding you, reinforcing the truth in each statement. Each day is a step forward, Mia Rodriguez. Embrace the power within you.`
+
+export const linkVoiceOverArtistsMyAffirmation = "https://lemondigital.notion.site/Voice-Over-Artists-MyAffirmation-ai-acb83e4627cf48749a2ceb9ad72af02c?pvs=4"
+export const linkAffirmationTemplates = "https://lemondigital.notion.site/Affirmation-text-Templates-0a2edbbb9f9d480b881d6923dee4f42f?pvs=4"

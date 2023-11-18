@@ -10,6 +10,7 @@ import {
 	ModalFooter,
     useDisclosure
 } from "@chakra-ui/react"
+import { generateText } from "../../services/openai"
 
 export const ModalOpenai = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -29,7 +30,7 @@ export const ModalOpenai = () => {
               <Button colorScheme='blue' mr={3} onClick={onClose}>
                 Close
               </Button>
-              <Button variant='ghost'>Secondary Action</Button>
+              <Button variant='ghost' onClick={() => generateText({text: "Secondary Action"})}>Secondary Action</Button>
             </ModalFooter>
           </ModalContent>
         </Modal>

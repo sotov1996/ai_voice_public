@@ -5,7 +5,7 @@ import { sendEmail } from "../../services/email"
 import { getVoices, getTextIntoSpeech } from "../../services/elevenLabs"
 import { FormFooter } from "./FormFooter"
 import { Stack, Heading } from "@chakra-ui/react"
-// import { ModalOpenai } from "./Modal"
+import { ModalOpenai } from "./Modal"
 
 import "./homePage.css"
 
@@ -18,6 +18,11 @@ export const HomePage = ({ setLoading, setAlert, plausible }) => {
         handlerStripeUrl()
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    const getPathTest = () => {
+        const query = new URLSearchParams(window.location.search);
+        return query.get("test_ilya_18112023")
+    }
 
     const handlerStripeUrl = async () => {
         const query = new URLSearchParams(window.location.search);
@@ -108,6 +113,7 @@ export const HomePage = ({ setLoading, setAlert, plausible }) => {
                     }}
                 >Synthesis</span>
             </Heading>
+            {getPathTest() && <ModalOpenai />}
             <FormInput
                 generateAudio={generateAudio}
                 voices={voices}

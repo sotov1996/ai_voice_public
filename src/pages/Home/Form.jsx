@@ -7,13 +7,10 @@ import {
 	Link
 } from "@chakra-ui/react"
 import { Field, Form, Formik } from "formik"
-import { defaultTextToSpeetch } from "../../data"
+import { defaultTextToSpeetch, linkVoiceOverArtistsMyAffirmation, linkAffirmationTemplates } from "../../data"
 import { EmailIcon, LinkIcon, InputAi, SelectAi, LabelAi, TextAi, ButtonAi } from "../../components"
 import { RepeatIcon } from '@chakra-ui/icons'
 import "./form.css"
-
-const linkVoiceOverArtistsMyAffirmation = "https://lemondigital.notion.site/Voice-Over-Artists-MyAffirmation-ai-acb83e4627cf48749a2ceb9ad72af02c?pvs=4"
-const linkAffirmationTemplates = "https://lemondigital.notion.site/Affirmation-text-Templates-0a2edbbb9f9d480b881d6923dee4f42f?pvs=4"
   
 export const FormInput = ({ payment, generateAudio, voices, audioUrl, setAudioUrl }) => {
   	const audioref = useRef()
