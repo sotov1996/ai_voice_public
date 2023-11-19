@@ -8,7 +8,7 @@ export const LinkIcon = () => {
 			viewBox="0 0 13 12"
 			className="chakra-icon css-onkibi"
 			xmlns="http://www.w3.org/2000/svg"
-		>
+		>	
 			<path
 				d="M7.16669 0L9.36202 2.19533L4.69535 6.862L5.63802 7.80467L10.3047 3.138L12.5 5.33333V0H7.16669Z"
 				fill="#347B61"

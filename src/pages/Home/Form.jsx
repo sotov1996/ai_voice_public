@@ -68,7 +68,7 @@ export const FormInput = ({ payment, generateAudio, voices, audioUrl, setAudioUr
 		return (
 			<>
 				<TextAi
-					style={{ pt: "10px", textAlign: "left", fontSize: "16px" }}
+					style={{ p: "10px 0", textAlign: "left", fontSize: "16px" }}
 					text="Voice preview:"
 				/>
 				<audio
@@ -111,7 +111,7 @@ export const FormInput = ({ payment, generateAudio, voices, audioUrl, setAudioUr
 						)}
 					</Field>
 					<TextAi
-						style={{ pt: "25px", textAlign: "left", fontSize: "18px" }}
+						style={{ pt: "25px", textAlign: "left", fontSize: "18px", fontWeight: "bold" }}
 						text="Step 1:"
 					/>
 					<TextAi
@@ -136,7 +136,7 @@ export const FormInput = ({ payment, generateAudio, voices, audioUrl, setAudioUr
 						<LinkIcon />
 					</Stack>
 					<TextAi
-						style={{ pt: "25px", textAlign: "left", fontSize: "18px" }}
+						style={{ pt: "25px", textAlign: "left", fontSize: "18px", fontWeight: "bold" }}
 						text="Step 2:"
 					/>
 					<TextAi
