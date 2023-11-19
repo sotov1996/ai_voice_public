@@ -24,9 +24,9 @@ export const HomePage = ({ setLoading, setAlert, plausible }) => {
         if (query.get('success')) {
             const body = JSON.parse(localStorage.getItem('text-to-speech'))
             if (body?.session_id === sessionId) {
-                setLoading(true)
+                setLoading((prev) => ({ ...prev, email: true }))
                 const data = await sendEmail(body);
-                setLoading(false)
+                setLoading((prev) => ({ ...prev, email: false }))
                 if (!data.success) {
                     setAlert({ status: "error", message: data.message })
                     localStorage.removeItem('text-to-speech')
@@ -43,7 +43,9 @@ export const HomePage = ({ setLoading, setAlert, plausible }) => {
     }
 
     const getVoicesEleveLabs = async () => {
+        setLoading((prev) => ({ ...prev, voices: true }))
         const data = await getVoices()
+        setLoading((prev) => ({ ...prev, voices: false }))
         if (!data.success) {
             setAlert({ status: "error", message: data.message })
             return setTimeout(() => setAlert(""), 3000);
@@ -113,6 +115,7 @@ export const HomePage = ({ setLoading, setAlert, plausible }) => {
                 audioUrl={audioUrl}
                 payment={payment}
                 setAudioUrl={setAudioUrl}
+                setLoading={setLoading}
             />
             <FormFooter />
         </Stack>

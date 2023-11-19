@@ -11,12 +11,12 @@ const plausible = Plausible({
   })
 
 export const App = () => {
-	const [loading, setLoading] = useState(false)
+	const [loading, setLoading] = useState({})
 	const [alert, setAlert] = useState("")
 
 	return (
 		<ChakraProvider>
-			{loading && <CustomSpnner />}
+			{(loading.email || loading.voices || loading.gpt) && <CustomSpnner />}
 			{alert && <CustomAlert status={alert.status} message={alert.message} />}
 			<Flex
 				minH={'100vh'}

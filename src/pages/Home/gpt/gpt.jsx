@@ -5,7 +5,7 @@ import { generateText } from "../../../services/openai"
 import { typesAffirmation, kindsAffirmation } from "../../../data"
 import { Stack } from "@chakra-ui/react"
 
-export const FormGpt = ({ closeModal, setText }) => {
+export const FormGpt = ({ closeModal, setText, setLoading }) => {
     const validateValues = (key, value) => {
 		const errors = {}
 		if (!value) {
@@ -15,9 +15,11 @@ export const FormGpt = ({ closeModal, setText }) => {
 	}
 
     const onSubmit = async (values, actions) => {
+        setLoading((prev) => ({ ...prev, gpt: true }))
         const { name_surname, type_affirmation, kind_affirmation } = values
         const text = `My name is ${name_surname}, I want ${type_affirmation} motivation about ${kind_affirmation}.`
         const data = await generateText({ text })
+        setLoading((prev) => ({ ...prev, gpt: false }))
         if (!data.success) {
             return false
         }

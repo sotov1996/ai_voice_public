@@ -8,14 +8,14 @@ import {
 } from "@chakra-ui/react"
 import { Field, Form, Formik } from "formik"
 import { defaultTextToSpeetch, linkVoiceOverArtistsMyAffirmation, linkAffirmationTemplates } from "../../data"
-import { EmailIcon, LinkIcon, InputAi, SelectAi, LabelAi, TextAi, ButtonAi } from "../../components"
+import { EmailIcon, LinkIcon, InputAi, LabelAi, TextAi, ButtonAi } from "../../components"
 import { ModalOpenai } from "./Modal"
+import { Voices } from "./Voices"
 import { RepeatIcon } from '@chakra-ui/icons'
 import "./form.css"
   
-export const FormInput = ({ payment, generateAudio, voices, audioUrl, setAudioUrl }) => {
+export const FormInput = ({ payment, generateAudio, voices, audioUrl, setAudioUrl, setLoading }) => {
   	const audioref = useRef()
-  	const previewAudioRef = useRef()
 
 	const validateEmail = (email) => {
 		const errors = {}
@@ -60,27 +60,6 @@ export const FormInput = ({ payment, generateAudio, voices, audioUrl, setAudioUr
 		actions.setSubmitting(false)
 	}
 
-	const getPreviewAudioUrl = (voice_id) => {
-		const voice = voices.find( voice => voice.voice_id === voice_id)
-		if (previewAudioRef.current) {
-			previewAudioRef.current.src = voice.preview_url
-		}
-		return (
-			<>
-				<TextAi
-					style={{ p: "10px 0", textAlign: "left", fontSize: "16px" }}
-					text="Voice preview:"
-				/>
-				<audio
-					ref={previewAudioRef}
-					controls
-				>
-					<source src={voice.preview_url} type="audio/mpeg" />
-				</audio>
-			</>
-		)
-	}
-
 	return (
 		<Formik
 			initialValues={{ email: "", text: defaultTextToSpeetch, voice_id: "" }}
@@ -111,24 +90,24 @@ export const FormInput = ({ payment, generateAudio, voices, audioUrl, setAudioUr
 						)}
 					</Field>
 					<TextAi
-						style={{ pt: "25px", textAlign: "left", fontSize: "18px", fontWeight: "bold" }}
-						text="Step 1:"
+						style={{ pt: "40px", textAlign: "left", fontSize: "18px", fontWeight: "bold" }}
+						text="Step 1: Text"
 					/>
 					<TextAi
 						style={{ pt: "10px", textAlign: "left", fontSize: "16px" }}
 						text="Generate pesonal text of affirmation with AI"
 					/>
-					<ModalOpenai setText={props.setFieldValue}/>
+					<ModalOpenai setText={props.setFieldValue} setLoading={setLoading}/>
 					<Stack
 						direction={{ base: 'row', sm: 'row' }}
-						pt={"10px"}
+						pt={"20px"}
 						align={'center'}
 					>
 						<Link
 							color={'rgba(52, 123, 97, 1)'}
-							fontSize={"14px"}
+							fontSize={"16px"}
 							fontFamily={"Poppins"}
-							lineHeight={"22px"}
+							lineHeight={"24px"}
 							fontWeight={400}
 							href={linkAffirmationTemplates}
 							isExternal
@@ -136,39 +115,30 @@ export const FormInput = ({ payment, generateAudio, voices, audioUrl, setAudioUr
 						<LinkIcon />
 					</Stack>
 					<TextAi
-						style={{ pt: "25px", textAlign: "left", fontSize: "18px", fontWeight: "bold" }}
-						text="Step 2:"
+						style={{ pt: "40px", textAlign: "left", fontSize: "18px", fontWeight: "bold" }}
+						text="Step 2: Voice-over"
 					/>
 					<TextAi
 						style={{ pt: "10px", textAlign: "left", fontSize: "16px" }}
 						text="Make final edits and generate natural sounding, human-quality voice over"
 					/>
-					<Field name="voice_id">
-						{({ field, form }) => (
-							<SelectAi
-								field={field}
-								form={form}
-								name="voice_id"
-								labelText="Voice (30 languages)"
-								placeholder="Select voice..."
-								icon={<LinkIcon />}
-								link={linkVoiceOverArtistsMyAffirmation}
-								linkName="Voice Over Examples"
-							>
-								{voices.map((voice) => (
-									<option key={voice.voice_id} value={voice.voice_id}>
-										{voice.name}
-										{" - "}
-										{[
-											voice.labels.description,
-											voice.labels["use case"] || voice.labels["use_case"] || voice.labels["usecase"]
-										].filter( item => item).join(", ")}
-									</option>
-								))}
-							</SelectAi>
-						)}
-					</Field>
-					{props.values.voice_id && getPreviewAudioUrl(props.values.voice_id)}
+					{voices.length && <Voices values={voices} setVoice={props.setFieldValue} />}
+					<Stack
+						direction={{ base: 'row', sm: 'row' }}
+						pt={"20px"}
+						align={'center'}
+					>
+						<Link
+							color={'rgba(52, 123, 97, 1)'}
+							fontSize={"16px"}
+							fontFamily={"Poppins"}
+							lineHeight={"24px"}
+							fontWeight={400}
+							href={linkVoiceOverArtistsMyAffirmation}
+							isExternal
+						>Voice Over Examples</Link>
+						<LinkIcon />
+					</Stack>
 					<Field name="text">
 						{({ field, form }) => (
 							<FormControl isInvalid={form.errors.text && form.touched.text} mt={4}>
