@@ -41,7 +41,7 @@ export const Voices = ({ values, setVoice }) => {
 		<Accordion allowToggle pt={"10px"}>
 			<AccordionItem>
 				<h2>
-					<AccordionButton>
+					<AccordionButton p={"15px 20px"}>
 						<Box as="span" flex="1" {...styleFormText}>
                             Voice (30 languages)
 						</Box>
