@@ -43,7 +43,7 @@ const generateText = async (body) => {
             "messages": [
                 {
                     "role": "user",
-                    "content": `${text} up to 1500 characters`
+                    "content": `${text} up to 200 characters`
                 }
             ],
             "model": "gpt-3.5-turbo"
