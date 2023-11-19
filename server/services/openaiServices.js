@@ -37,7 +37,7 @@ const generateText = async (body) => {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer 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"
+            "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
         },
         body: JSON.stringify({
             "messages": [
