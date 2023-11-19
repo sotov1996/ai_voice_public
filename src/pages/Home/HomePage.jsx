@@ -32,6 +32,7 @@ export const HomePage = ({ setLoading, setAlert, plausible }) => {
                     localStorage.removeItem('text-to-speech')
                     return setTimeout(() => setAlert(""), 3000);
                 }
+                localStorage.removeItem('text-to-speech')
                 setAlert({ status: "success", message: "The payment was successful." })
                 setTimeout(() => setAlert(""), 5000);
                 plausible.trackEvent('Successful Payment')
