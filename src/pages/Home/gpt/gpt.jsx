@@ -49,7 +49,7 @@ export const FormGpt = ({ closeModal, setText }) => {
                                 form={form}
                                 name="name_surname"
                                 labelText="Your name and surname"
-                                placeholder="Petr Ivanov"
+                                placeholder="John Galt"
                             />
                         )}
                     </Field>
