@@ -2,12 +2,11 @@ const openaiServices = require("../services/openaiServices")
 
 const generateText = async (req, res) => {
     try {
-        console.log("req.body",req.body)
         if (!req.body.text) {
           return res.send(400);
         }
 
-        const content = await openaiServices.generateText(req.body.text)
+        const content = await openaiServices.generateText(req.body)
 
         return res.status(200).json(content)
       } catch (e) {

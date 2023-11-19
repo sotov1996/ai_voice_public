@@ -46,9 +46,9 @@ export const SelectAi = (props) => {
                     >
                         <Link
                             color={'rgba(52, 123, 97, 1)'}
-                            fontSize={"16px"}
+                            fontSize={"14px"}
                             fontFamily={"Poppins"}
-                            lineHeight={"24px"}
+                            lineHeight={"22px"}
                             fontWeight={400}
                             href={link}
                             isExternal

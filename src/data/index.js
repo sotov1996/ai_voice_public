@@ -24,3 +24,16 @@ With each affirmation, imagine the calm, assuring voice of a wise mentor guiding
 
 export const linkVoiceOverArtistsMyAffirmation = "https://lemondigital.notion.site/Voice-Over-Artists-MyAffirmation-ai-acb83e4627cf48749a2ceb9ad72af02c?pvs=4"
 export const linkAffirmationTemplates = "https://lemondigital.notion.site/Affirmation-text-Templates-0a2edbbb9f9d480b881d6923dee4f42f?pvs=4"
+
+
+export const typesAffirmation = ["Invigorating", "Calming"]
+export const kindsAffirmation = [
+    "Wealth",
+    "Joy from little things",
+    "Taking care of yourself",
+    "Family and loved ones",
+    "Mental health",
+    "Self-esteem",
+    "Exam preparation",
+    "Sports"
+]

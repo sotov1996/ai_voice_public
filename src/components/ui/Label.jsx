@@ -5,10 +5,10 @@ import {
 
 const styleFormLabel = {
     fontFamily: "Poppins",
-    fontSize: "16px",
+    fontSize: "14px",
     color: "rgba(105, 101, 89, 1)",
     fontWeight: 400,
-    lineHeight: "24px",
+    lineHeight: "22px",
     letterSpacing: "0em",
     textAlign: "left"
 }

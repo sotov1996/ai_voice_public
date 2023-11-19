@@ -4,36 +4,54 @@ import {
 	ModalOverlay,
 	ModalCloseButton,
 	ModalContent,
-	Button,
 	ModalHeader,
 	ModalBody,
-	ModalFooter,
-    useDisclosure
+	useDisclosure,
 } from "@chakra-ui/react"
-import { generateText } from "../../services/openai"
+import { ButtonAi } from "../../components"
+import { FormGpt } from "./gpt"
 
-export const ModalOpenai = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    return (
-      <>
-        <Button onClick={onOpen}>Open Modal</Button>
-  
-        <Modal isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Modal Title</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-            </ModalBody>
-  
-            <ModalFooter>
-              <Button colorScheme='blue' mr={3} onClick={onClose}>
-                Close
-              </Button>
-              <Button variant='ghost' onClick={() => generateText({text: "Secondary Action"})}>Secondary Action</Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
-      </>
-    )
-  }
+export const ModalOpenai = (props) => {
+	const { isOpen, onOpen, onClose } = useDisclosure()
+	return (
+		<>
+			<ButtonAi
+				text={"Start"}
+				other={{
+					type: "button",
+				}}
+				style={{
+					mt: "12px",
+				}}
+				handler={onOpen}
+			/>
+
+			<Modal isOpen={isOpen} onClose={onClose} isCentered>
+				<ModalOverlay />
+				<ModalContent
+					borderRadius={"16px"}
+					bg={"rgba(246, 245, 242, 1)"}
+					boxShadow={"0px 16px 24px 0px rgba(64, 52, 16, 0.08)"}
+					p={"24px 24px"}
+				>
+					<ModalHeader
+						fontFamily={"Playfair Display"}
+						fontSize={"26px"}
+						fontWeight={500}
+						lineHeight={"32px"}
+						color={"rgba(52, 123, 98, 1)"}
+						pt={"32px"}
+						textAlign={"center"}
+						fontStyle={"italic"}
+					>
+						Create Affirmation Using GPT
+					</ModalHeader>
+					<ModalCloseButton />
+					<ModalBody>
+						<FormGpt closeModal={onClose} setText={props.setText} />
+					</ModalBody>
+				</ModalContent>
+			</Modal>
+		</>
+	)
+}
