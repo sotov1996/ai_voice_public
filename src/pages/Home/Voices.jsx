@@ -48,7 +48,7 @@ export const Voices = ({ values, setVoice }) => {
 						<AccordionIcon />
 					</AccordionButton>
 				</h2>
-				<AccordionPanel pb={4} overflowY={"scroll"} maxHeight={"400px"}>
+				<AccordionPanel pb={4} overflowY={"scroll"} maxHeight={"300px"}>
                     <RadioGroup onChange={setVoiceId} value={voiceId}>
                         {values.map( (value, index) => (
                             <Stack key={index}>
