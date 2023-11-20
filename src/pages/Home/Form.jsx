@@ -204,7 +204,6 @@ export const FormInput = ({ payment, generateAudio, voices, audioUrl, setAudioUr
 							other={{
 								type: "button"
 							}}
-							handler={() => console.log(props.values.voice_id)}
 						/>
 						{audioUrl && (
 							<ButtonAi

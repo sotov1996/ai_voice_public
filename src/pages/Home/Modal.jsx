@@ -26,13 +26,14 @@ export const ModalOpenai = (props) => {
 				handler={onOpen}
 			/>
 
-			<Modal isOpen={isOpen} onClose={onClose} isCentered>
+			<Modal isOpen={isOpen} onClose={onClose}>
 				<ModalOverlay />
 				<ModalContent
 					borderRadius={"16px"}
 					bg={"rgba(246, 245, 242, 1)"}
 					boxShadow={"0px 16px 24px 0px rgba(64, 52, 16, 0.08)"}
 					p={"24px 24px"}
+					m={"auto 20px"}
 				>
 					<ModalHeader
 						fontFamily={"Playfair Display"}

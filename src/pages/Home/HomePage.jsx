@@ -4,13 +4,15 @@ import { createCheckoutSession } from "../../services/stripe"
 import { sendEmail } from "../../services/email"
 import { getVoices, getTextIntoSpeech } from "../../services/elevenLabs"
 import { FormFooter } from "./FormFooter"
-import { Stack, Heading } from "@chakra-ui/react"
+import { Stack, Heading, useMediaQuery } from "@chakra-ui/react"
 
 import "./homePage.css"
 
 export const HomePage = ({ setLoading, setAlert, plausible }) => {
     const [voices, setVoisec] = useState([])
     const [audioUrl, setAudioUrl] = useState(null)
+
+    const [isLargerThan500] = useMediaQuery('(max-width: 500px)')
 
     useEffect(() => {
         getVoicesEleveLabs()
@@ -90,7 +92,7 @@ export const HomePage = ({ setLoading, setAlert, plausible }) => {
             maxW={'644px'}
             bg={'rgba(246, 245, 242, 1)'}
             boxShadow={'0px 16px 24px 0px rgba(64, 52, 16, 0.08)'}
-            p={"32px 64px 32px 64px"}>
+            p={isLargerThan500 ? "16px 32px" : "32px 64px"}>
             <Heading
                 fontFamily={"Playfair Display"}
                 fontSize={"32px"}

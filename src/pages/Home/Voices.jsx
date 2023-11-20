@@ -60,7 +60,7 @@ export const Voices = ({ values, setVoice }) => {
                                     <audio controls>
                                         <source src={value.preview_url} type="audio/mpeg" />
                                     </audio>
-                                    <Radio value={value.voice_id}  colorScheme='green' borderColor={"rgba(105, 101, 89, 1)"} />
+                                    <Radio value={value.voice_id} colorScheme="green" borderColor={"rgb(166 166 166)"} />
                                 </Stack>
                             </Stack>
                         ))}
