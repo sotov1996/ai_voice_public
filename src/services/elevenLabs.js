@@ -1,7 +1,7 @@
 import { fetchNode } from "../lib/fetch"
 
 const GET_VOICES = "/api/elevenlabs/voices"
-const TEXT_INTO_SPEECH= `/api/elevenlabs/text-into-speetch`
+const TEXT_INTO_SPEECH= `/api/elevenlabs/text-into-speech`
 
 export const getVoices = async (body) => {
     try {
