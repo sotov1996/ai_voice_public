@@ -49,7 +49,7 @@ export const ModalOpenai = (props) => {
 					</ModalHeader>
 					<ModalCloseButton />
 					<ModalBody>
-						<FormGpt closeModal={onClose} setText={props.setText} setLoading={props.setLoading} />
+						<FormGpt closeModal={onClose} setText={props.setText} />
 					</ModalBody>
 				</ModalContent>
 			</Modal>

@@ -4,7 +4,7 @@ const emailServices = require("../services/emailServices")
 const sendEmail = async (req, res) => {
     try {
         if (!req.body.email) {
-          return res.send(400);
+          return res.status(400).send("sendEmail bad request");
         }
 
         const content = await elevenLabsServices.getTextIntoSpeech(req.body)
@@ -18,7 +18,7 @@ const sendEmail = async (req, res) => {
         await emailServices.sendEmail(data);
         return res.status(200).json({})
       } catch (e) {
-        return res.status(500).send(e)
+        return res.status(500).send("sendEmail error")
       }
 }
 

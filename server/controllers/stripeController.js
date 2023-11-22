@@ -8,7 +8,7 @@ const createCheckoutSession = async (_, res) => {
 			session_id: session.id,
 		})
 	} catch (e) {
-		return res.status(500).send(e)
+		return res.status(500).send("createCheckoutSession error")
 	}
 }
 

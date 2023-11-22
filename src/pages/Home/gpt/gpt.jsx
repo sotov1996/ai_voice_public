@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Field, Form, Formik } from "formik"
 import { SelectAi, InputAi, ButtonAi } from "../../../components"
 import { generateText } from "../../../services/openai"
 import { typesAffirmation, kindsAffirmation } from "../../../data"
+import { Context } from "../../../context";
 import { Stack } from "@chakra-ui/react"
 
-export const FormGpt = ({ closeModal, setText, setLoading }) => {
+export const FormGpt = ({ closeModal, setText }) => {
+    const { handlerLoading, handlerAlert } = useContext(Context)
+
     const validateValues = (key, value) => {
 		const errors = {}
 		if (!value) {
@@ -15,14 +18,15 @@ export const FormGpt = ({ closeModal, setText, setLoading }) => {
 	}
 
     const onSubmit = async (values, actions) => {
-        setLoading((prev) => ({ ...prev, gpt: true }))
+        handlerLoading({ gpt: true })
         const { name_surname, type_affirmation, kind_affirmation } = values
         const text = `My name is ${name_surname}, I want ${type_affirmation} motivation about ${kind_affirmation}.`
         const data = await generateText({ text })
-        setLoading((prev) => ({ ...prev, gpt: false }))
+        handlerLoading({ gpt: false })
         if (!data.success) {
-            return false
+            return handlerAlert({ status: "error", message: data.message })
         }
+        handlerAlert({ status: "success", message: "Text generation was successful." })
         actions.setSubmitting(false)
         setText("text", data.content)
         closeModal()

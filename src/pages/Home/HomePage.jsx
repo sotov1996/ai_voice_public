@@ -1,14 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { FormInput } from "./Form";
 import { createCheckoutSession } from "../../services/stripe"
 import { sendEmail } from "../../services/email"
 import { getVoices, getTextIntoSpeech } from "../../services/elevenLabs"
 import { FormFooter } from "./FormFooter"
+import { Context } from "../../context";
 import { Stack, Heading, useMediaQuery } from "@chakra-ui/react"
+import { useNavigate } from 'react-router-dom'
 
 import "./homePage.css"
 
-export const HomePage = ({ setLoading, setAlert, plausible }) => {
+export const HomePage = () => {
+    const  { handlerAlert, handlerLoading, plausible } = useContext(Context)
+
+    const navigate = useNavigate()
+
     const [voices, setVoisec] = useState([])
     const [audioUrl, setAudioUrl] = useState(null)
 
@@ -25,33 +31,32 @@ export const HomePage = ({ setLoading, setAlert, plausible }) => {
         const sessionId = query.get("session_id")
         if (query.get('success')) {
             const body = JSON.parse(localStorage.getItem('text-to-speech'))
+            localStorage.removeItem('text-to-speech')
+            navigate({ pathname: "/", search: "" })
             if (body?.session_id === sessionId) {
-                setLoading((prev) => ({ ...prev, email: true }))
+                handlerLoading({ email: true })
                 const data = await sendEmail(body);
-                setLoading((prev) => ({ ...prev, email: false }))
+                handlerLoading({ email: false })
                 if (!data.success) {
-                    setAlert({ status: "error", message: data.message })
-                    localStorage.removeItem('text-to-speech')
-                    return setTimeout(() => setAlert(""), 3000);
+                    return handlerAlert({ status: "error", message: data.message })
                 }
-                localStorage.removeItem('text-to-speech')
-                setAlert({ status: "success", message: "The payment was successful." })
-                setTimeout(() => setAlert(""), 5000);
+
+                handlerAlert({ status: "success", message: "The payment was successful." })
                 plausible.trackEvent('Successful Payment')
             }
         } else if (query.get('canceled')) {
+            navigate({ pathname: "/", search: "" })
             localStorage.removeItem('text-to-speech')
-            // window.location.replace("/")
+            handlerAlert({ status: "warning", message: "The payment was cancelled." })
         }
     }
 
     const getVoicesEleveLabs = async () => {
-        setLoading((prev) => ({ ...prev, voices: true }))
+        handlerLoading({ voices: true })
         const data = await getVoices()
-        setLoading((prev) => ({ ...prev, voices: false }))
+        handlerLoading({ voices: false })
         if (!data.success) {
-            setAlert({ status: "error", message: data.message })
-            return setTimeout(() => setAlert(""), 3000);
+            return handlerAlert({ status: "error", message: data.message })
         }
         setVoisec(data.voices.filter( voice => voice.name !== "Domi"))
     }
@@ -70,9 +75,9 @@ export const HomePage = ({ setLoading, setAlert, plausible }) => {
             text: values.text.split(" ").slice(0, 30).join(" ")
         })
         if (!data.success) {
-            setAlert({ status: "error", message: data.message })
-            return setTimeout(() => setAlert(""), 3000);
+            return handlerAlert({ status: "error", message: data.message })
         }
+        handlerAlert({ status: "success", message: "Sound generation was successful." })
         plausible.trackEvent('Generate')
         const blob = new Blob([data.content], { type: 'audio/mpeg' });
         const urlAudioBlob = URL.createObjectURL(blob);
@@ -118,7 +123,6 @@ export const HomePage = ({ setLoading, setAlert, plausible }) => {
                 audioUrl={audioUrl}
                 payment={payment}
                 setAudioUrl={setAudioUrl}
-                setLoading={setLoading}
             />
             <FormFooter />
         </Stack>

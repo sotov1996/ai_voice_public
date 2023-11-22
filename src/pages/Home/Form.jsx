@@ -14,7 +14,7 @@ import { Voices } from "./Voices"
 import { RepeatIcon } from '@chakra-ui/icons'
 import "./form.css"
   
-export const FormInput = ({ payment, generateAudio, voices, audioUrl, setAudioUrl, setLoading }) => {
+export const FormInput = ({ payment, generateAudio, voices, audioUrl, setAudioUrl }) => {
   	const audioref = useRef()
 
 	const validateEmail = (email) => {
@@ -97,7 +97,7 @@ export const FormInput = ({ payment, generateAudio, voices, audioUrl, setAudioUr
 						style={{ pt: "10px", textAlign: "left", fontSize: "16px" }}
 						text="Generate pesonal text of affirmation with AI"
 					/>
-					<ModalOpenai setText={props.setFieldValue} setLoading={setLoading}/>
+					<ModalOpenai setText={props.setFieldValue} />
 					<Stack
 						direction={{ base: 'row', sm: 'row' }}
 						pt={"20px"}
