@@ -180,7 +180,7 @@ export const FormInput = ({ payment, generateAudio, voices, audioUrl, setAudioUr
 						<Stack>
 							<TextAi
 								style={{ pt: "40px" }}
-								text="Listen to a small video recording. Full voice over track is unlocked available just for $39 after the payment."
+								text="Listen to a small video recording. Full voice over track is unlocked available just for $9 after the payment."
 							/>
 							<TextAi
 								style={{ pt: "40px", fontWeight: "bold" }}
@@ -219,7 +219,7 @@ export const FormInput = ({ payment, generateAudio, voices, audioUrl, setAudioUr
 							/>
 						)}
 						<ButtonAi
-							text={ audioUrl ? "Buy full track - $39" : "Generate" }
+							text={ audioUrl ? "Buy full track - $9" : "Generate" }
 							style={{
 								color: "rgba(255, 255, 255, 1)",
 								bg: "rgba(87, 152, 129, 1)",
